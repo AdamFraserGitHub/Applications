@@ -32,7 +32,7 @@ public class Init {
         int maxPossible = (int) (Math.PI * (maxCityRadius * maxCityRadius));
         System.out.println("enter the maximum number of super-blocks the city should have (integer) \n"
                            + "this should be less than " + maxPossible + " becasue that is the area of your city in super-blocks \n"
-                           + "a good targetr would be 75%");
+                           + "a good target would be 75%");
         maxSuperBlocks = scanner.nextInt();
     }
     

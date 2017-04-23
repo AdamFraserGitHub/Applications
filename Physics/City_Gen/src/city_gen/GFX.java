@@ -3,6 +3,7 @@ package city_gen;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.util.Arrays;
 import java.util.Random;
 
 public class GFX {
@@ -13,7 +14,7 @@ public class GFX {
     private static float cityCentre, superBlockPixelLength, unitPixelLength;
     private static boolean[][] superBlockMap, parentCandidate;
     private static int[][] candidate;
-    private static int newBlockID, newBlockXIndex, newBlockYIndex;
+    private static int newBlockID;
     int candidateID;
     Random random = new Random();
     
@@ -30,6 +31,7 @@ public class GFX {
         candidate = new int[2*Init.maxCityRadius][2*Init.maxCityRadius];
         
         superBlockMap[Init.maxCityRadius][Init.maxCityRadius] = true;
+        
         for (int k = 0; k < Init.maxSuperBlocks; k++){
         //this loop cycles through all positions and finds which where there are blocks which are unsurrounded
         for(int i = 0; i < 2*Init.maxCityRadius; i++) {
@@ -68,36 +70,38 @@ public class GFX {
                 
                 if(j < 2*Init.maxCityRadius - 1) {
                     if(parentCandidate[i][j] && !superBlockMap[i][j+1]) {
-                        candidate[i][j+1] = candidateID;
                         candidateID++;
+                        candidate[i][j+1] = candidateID;
                     }
                 }
                 
                 if(j > 0){
                     if(parentCandidate[i][j] && !superBlockMap[i][j-1]) {
-                        candidate[i][j-1] = candidateID;
                         candidateID++;
+                        candidate[i][j-1] = candidateID;
                     }
                 }
                 
                 if(i < 2*Init.maxCityRadius - 1) {
                     if(parentCandidate[i][j] && !superBlockMap[i+1][j]) {
-                        candidate[i+1][j] = candidateID;
                         candidateID++;
+                        candidate[i+1][j] = candidateID;
                     }
                 }
                 
                 if(i > 0) {
                     if(parentCandidate[i][j] && !superBlockMap[i-1][j]) {
-                        candidate[i-1][j] = candidateID;
                         candidateID++;
+                        candidate[i-1][j] = candidateID;
                     }
                 }
             }
         }
         
         if(candidateID != 0){
-            newBlockID = random.nextInt(candidateID);
+            newBlockID = random.nextInt(candidateID) + 1;
+        } else {
+            newBlockID = 0;
         }
         System.out.println("newBlockID:" + newBlockID);
        
@@ -105,10 +109,8 @@ public class GFX {
             for(int j = 0; j < 2*Init.maxCityRadius; j++) {
                 if(candidate[i][j] == newBlockID) {
                     
-                    System.out.println(candidate[i][j]);
-                    newBlockXIndex = i;
-                    newBlockYIndex = j;
-                    System.out.println("X: " + newBlockXIndex + "\nY:" + newBlockYIndex);
+                    System.out.println("candidateID:" + candidate[i][j] + "\nNEwBlockID: " + newBlockID);
+                    System.out.println("X: " + i + "\nY:" + j + "\n");
                     superBlockMap[i][j] = true;
                 }
             }
@@ -147,7 +149,6 @@ public class GFX {
             XPos = width/8;
         }
 //        g.drawRect((int) (newBlockXIndex * superBlockPixelLength), (int) (newBlockYIndex * superBlockPixelLength), (int) superBlockPixelLength, (int) superBlockPixelLength);
-        
         bs.show();
         g.dispose();
     }
