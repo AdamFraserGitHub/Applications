@@ -3,7 +3,6 @@ package city_gen;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.util.Arrays;
 import java.util.Random;
 
 public class GFX {
@@ -16,7 +15,7 @@ public class GFX {
     
     public GFX(Display display, int width, int height) {
         this.display = display;
-        this.width = width;
+        this.width = width;    
         this.height = height;
         
         superBlockPixelLength = ((height/2 + height/4)/2) / Init.maxCityRadius; 
@@ -36,15 +35,12 @@ public class GFX {
         
         g.setColor(Color.red);
         
-        int sum = 0;
-        
         float XPos = width/8;
         float YPos = height/8;
         for(int i = 0; i < 2*Init.maxCityRadius; i++) {
             for(int j = 0; j < 2*Init.maxCityRadius; j++) {
                 if(SuperBlockMapGen.superBlockMap[i][j]) {
                     g.drawRect((int) (XPos - superBlockPixelLength/2), (int) (YPos - superBlockPixelLength/2), (int) superBlockPixelLength, (int) superBlockPixelLength);
-                    sum++;
                 }
                 XPos += superBlockPixelLength;
             }
@@ -53,6 +49,5 @@ public class GFX {
         }
         bs.show();
         g.dispose();
-        System.out.println(sum);
     }
 }

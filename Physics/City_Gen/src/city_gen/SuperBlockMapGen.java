@@ -23,6 +23,8 @@ public class SuperBlockMapGen {
     }
     
     public void generate() {
+        System.out.println("ok");
+        float startTime = System.nanoTime();
         superBlockMap = new boolean[2*maxCityRadius][2*maxCityRadius];
         parentCandidate = new boolean[2*maxCityRadius][2*maxCityRadius];
         candidate = new int[2*maxCityRadius][2*maxCityRadius];
@@ -121,6 +123,8 @@ public class SuperBlockMapGen {
                 }
             }
         }
+        float timeTaken = (System.nanoTime() - startTime)/1000000000;
+        System.out.println(timeTaken + "s\n" + System.nanoTime());
     }
     
     public boolean checkIndexInRadius(int i, int j) {
