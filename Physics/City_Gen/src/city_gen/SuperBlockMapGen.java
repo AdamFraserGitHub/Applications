@@ -34,7 +34,7 @@ public class SuperBlockMapGen {
             subtractFromLoop = 1;
         }else if(maxCentralNodes > 0) {
             for(int i = 0; i < maxCentralNodes; i++){
-                superBlockMap[(int) (random.nextInt(maxCityRadius) + 0.25*maxCityRadius)][(int) (random.nextInt(maxCityRadius) + 0.25*maxCityRadius)] = true;
+                superBlockMap[(int) (random.nextInt((int) 1.5*maxCityRadius) + 0.125*maxCityRadius)][(int) (random.nextInt((int) 1.5*maxCityRadius) + 0.125*maxCityRadius)] = true;
                 subtractFromLoop = maxCentralNodes;
             }
         }
@@ -124,7 +124,7 @@ public class SuperBlockMapGen {
             }
         }
         float timeTaken = (System.nanoTime() - startTime)/1000000000;
-        System.out.println(timeTaken + "s\n" + System.nanoTime());
+        System.out.println(timeTaken + "s");
     }
     
     public boolean checkIndexInRadius(int i, int j) {

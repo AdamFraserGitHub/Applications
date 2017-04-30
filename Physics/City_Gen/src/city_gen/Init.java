@@ -10,6 +10,8 @@ public class Init {
     public static void main(String[] args) {
         getUserValues();
         
+        BlockMapGen bmg = new BlockMapGen(maxSuperBlocks);
+        
         SuperBlockMapGen superMapGen = new SuperBlockMapGen(maxCityRadius, maxSuperBlocks, maxCentralNodes);
         Display display = new Display(800, 800, "City Gen");
         GFX gfx = new GFX(display, 800, 800);
